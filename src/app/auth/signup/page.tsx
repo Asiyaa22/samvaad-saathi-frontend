@@ -1,15 +1,17 @@
-
-import Link from "next/link";
 import GoogleSignupButton from "@/components/GoogleSignupButton";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function SignupPage() {
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-b from-[#7379eb94] via-[#171930] via-85% to-black px-4">
       {/* Logo */}
-      <img
+      <Image
         src="/barabari_logo.png"
         alt="Samvaad Saathi Logo"
         className="w-[116px] h-[110px] mb-6"
+        width={300}
+        height={300}
       />
 
       {/* Welcome Text */}
@@ -28,7 +30,10 @@ export default function SignupPage() {
       {/* Already have account */}
       <p className="font-noto mt-6 text-[12px] font-[700] text-white/80">
         Already have an account?{" "}
-        <Link href="/login" className="text-white text-[12px] font-[700] hover:underline">
+        <Link
+          href="/login"
+          className="text-white text-[12px] font-[700] hover:underline"
+        >
           Login
         </Link>
       </p>
