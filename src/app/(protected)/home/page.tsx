@@ -1,42 +1,36 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function HomePage() {
-  const router = useRouter();
   const userName = "Saniyya"; // TODO: replace with dynamic user from backend
 
   return (
-    <div className="flex flex-col min-h-screen bg-white relative">
-      {/* Greeting Row */}
-      <div className="flex justify-between items-center px-6 mt-6">
-        <h1 className="text-[32px] font-[700] text-black font-inter">
-          Hi {userName}!
-        </h1>
-        <img
-          src="https://placehold.co/52x52"
-          alt="Profile"
-          className="w-12 h-12 rounded-full"
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center py-4 relative">
+        <h2 className="prose lg:prose-2xl font-bold">Hi {userName}</h2>
+
+        <Image
+          width={50}
+          height={50}
+          src={`https://avatar.iran.liara.run/username?username=${userName?.replaceAll(
+            " ",
+            "-"
+          )}`}
+          alt="user avatar"
         />
       </div>
 
-      {/* Illustration */}
-      <div className="flex-1 flex items-center justify-center">
-        <img
-          src="/home.png"
-          alt="Illustration"
-          className="w-[318px] h-[245px] object-contain mx-auto"
-        />
+      <div className="flex items-center justify-center flex-col gap-20">
+        <Image src="/home.png" alt="home image" height={300} width={300} />
       </div>
 
-      {/* Get Started Button */}
-      <div className="px-6 mb-20">
-        <button
-          className="w-[377px] h-[56px] py-3 bg-black text-white font-[700] text-[16px] rounded-[10px] shadow-md"
-          onClick={() => router.push("/interview")} // TODO: route as needed
-        >
-          Get Started
-        </button>
+      <div className="absolute inset-x-0 bottom-20 px-6">
+        <Link href="interview-start">
+          <button className="w-full bg-black text-white font-bold font-xl p-4 rounded-xl">
+            Get Started
+          </button>
+        </Link>
       </div>
     </div>
   );
