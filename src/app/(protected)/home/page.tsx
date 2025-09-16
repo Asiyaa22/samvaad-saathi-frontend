@@ -4,6 +4,10 @@ import Link from "next/link";
 
 export default function HomePage() {
   const userName = "Saniyya"; // TODO: replace with dynamic user from backend
+  const userImageUrl = ""; // TODO: set to the user's profile image URL when available
+  const avatarUrl = `https://avatar.iran.liara.run/username?username=${encodeURIComponent(
+    userName
+  )}`;
 
   return (
     <div className="flex flex-col">
@@ -13,11 +17,10 @@ export default function HomePage() {
         <Image
           width={50}
           height={50}
-          src={`https://avatar.iran.liara.run/username?username=${userName?.replaceAll(
-            " ",
-            "-"
-          )}`}
+          src={userImageUrl || avatarUrl}
           alt="user avatar"
+          unoptimized
+          className="rounded-full object-cover"
         />
       </div>
 

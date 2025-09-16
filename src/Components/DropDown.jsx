@@ -8,9 +8,6 @@ export default function Dropdown({ label, options, value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full h-[56px] px-4 border rounded-[8px] text-black text-[14px] font-noto focus:outline-none"
-        style={{
-          background: "linear-gradient(35deg, #0F35FF, #94288A, #E8D610)",
-        }}
       >
         <option value="" disabled>
           Select {label}
