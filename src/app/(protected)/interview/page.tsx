@@ -41,6 +41,7 @@ const InterviewPage = () => {
   >({});
   const [hasMicPermission, setHasMicPermission] = useState(false);
   const [micError, setMicError] = useState<string | null>(null);
+  const [showSkipModal, setShowSkipModal] = useState(false);
   const isLast = currentIndex === questions.length - 1;
 
   // react-voice-visualizer controls
@@ -127,7 +128,16 @@ const InterviewPage = () => {
   };
 
   const handleNext = () => {
+    setShowSkipModal(true);
+  };
+
+  const confirmSkip = () => {
+    setShowSkipModal(false);
     if (!isLast) setCurrentIndex((i) => i + 1);
+  };
+
+  const cancelSkip = () => {
+    setShowSkipModal(false);
   };
 
   const handleSubmit = () => {
@@ -192,14 +202,14 @@ const InterviewPage = () => {
                     className="px-3 h-9 rounded-md border text-sm"
                     onClick={togglePauseResume}
                   >
-                    {isPausedRecording ? "Resume" : "Pause"}
+                    {isPausedRecording ? "Resume" : "Reset"}
                   </button>
                   <button
                     type="button"
                     className="px-3 h-9 rounded-md bg-black text-white text-sm"
                     onClick={stopRecording}
                   >
-                    Stop
+                    Upload
                   </button>
                 </div>
               </div>
@@ -283,9 +293,9 @@ const InterviewPage = () => {
                     type="button"
                     className="px-3 h-9 rounded-md border text-sm text-black/70"
                     onClick={handleNext}
-                    title={"Next"}
+                    title={"Skip"}
                   >
-                    ➜
+                    Skip ➜
                   </button>
                 )}
               </div>
@@ -293,6 +303,35 @@ const InterviewPage = () => {
           </div>
         )}
       </div>
+
+      {/* Skip Confirmation Modal */}
+      {showSkipModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 mx-4 max-w-sm w-full">
+            <h3 className="text-lg font-semibold mb-2">Skip Question?</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Are you sure you want to skip this question? You can always come
+              back to it later.
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50"
+                onClick={cancelSkip}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700"
+                onClick={confirmSkip}
+              >
+                Skip
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
