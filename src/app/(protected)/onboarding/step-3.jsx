@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
 import ProgressBar from "@/components/ProgressBar";
-import Dropdown from "@/components/Dropdown";
+import { useState } from "react";
 
 export default function Step3({ onNext, onBack }) {
   const [role, setRole] = useState("");
@@ -9,7 +8,12 @@ export default function Step3({ onNext, onBack }) {
   const [company, setCompany] = useState("");
   const [resume, setResume] = useState(null);
 
-  const roles = ["Frontend Developer", "Backend Developer", "Full Stack", "UI/UX Designer"];
+  const roles = [
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack",
+    "UI/UX Designer",
+  ];
   const experiences = ["Fresher", "1-2 years", "2-5 years", "5+ years"];
   const companies = ["Google", "Amazon", "Microsoft", "Other"];
 
@@ -19,7 +23,8 @@ export default function Step3({ onNext, onBack }) {
 
   const handleResumeUpload = (e) => {
     const file = e.target.files[0];
-    if (file && file.size <= 1024 * 1024) { // max 1MB
+    if (file && file.size <= 1024 * 1024) {
+      // max 1MB
       setResume(file);
     } else {
       alert("File size must be less than 1MB");
@@ -32,7 +37,9 @@ export default function Step3({ onNext, onBack }) {
       <ProgressBar step={3} />
 
       {/* Heading */}
-      <h2 className="text-[32px] font-noto font-[700] text-black mb-8 mt-4">Set Up</h2>
+      <h2 className="text-[32px] font-noto font-[700] text-black mb-8 mt-4">
+        Set Up
+      </h2>
 
       {/* Target Role Dropdown */}
       <Dropdown
@@ -50,14 +57,6 @@ export default function Step3({ onNext, onBack }) {
         onChange={setExperience}
       />
 
-      {/* Company Dropdown (Optional) */}
-      <Dropdown
-        label="Company (Optional)"
-        options={companies}
-        value={company}
-        onChange={setCompany}
-      />
-
       {/* Resume Upload */}
       <div className="mb-4">
         <label className="block mb-2 text-[14px] font-noto font-[500] text-black">
@@ -69,7 +68,9 @@ export default function Step3({ onNext, onBack }) {
           onChange={handleResumeUpload}
           className="w-full px-4 py-3 border rounded-lg"
         />
-        {resume && <p className="mt-2 text-[12px] text-green-600">{resume.name}</p>}
+        {resume && (
+          <p className="mt-2 text-[12px] text-green-600">{resume.name}</p>
+        )}
       </div>
 
       {/* Navigation Buttons */}
